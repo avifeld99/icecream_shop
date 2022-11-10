@@ -20,17 +20,18 @@ public class IceCreamCar implements IceCreamSeller {
 
     @Override
     public Cone orderCone(Cone.Flavor[] flavors) {
-        // check cone stock
-        if (stock.getCones() > 0 && stock.getBalls() > 0) {
+        // check cone stock, check balls stock
+        if (stock.getCones() > 0 && stock.getBalls() >= flavors.length) {
+            // update stock
+            stock.setCones(stock.getCones() - 1);
+            stock.setBalls(stock.getBalls() - flavors.length);
             return new Cone();
         } else {
             new NoMoreIceCreamException();
         }
 
-        // check balls stock
-
         // return new cone if order is possible
-        return null;
+        return new Cone();
     }
 
     private Cone prepareCone(Cone.Flavor[] flavors) {
@@ -39,10 +40,19 @@ public class IceCreamCar implements IceCreamSeller {
 
     @Override
     public IceRocket orderIceRocket() {
-        return null;
+        if (stock.getIceRockets() > 0) {
+            stock.setIceRockets(stock.getIceRockets() - 1);
+            return new IceRocket();
+        } else {
+            new NoMoreIceCreamException();
+        }
+        return new IceRocket();
     }
 
     private IceRocket prepareRocket() {
+        if (stock.getIceRockets() > 0) {
+            return new IceRocket();
+        }
         return null;
     }
 
