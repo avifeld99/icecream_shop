@@ -3,22 +3,21 @@ package be.intecbrussel.eatables;
 import java.util.Arrays;
 
 public class Cone implements Eatable {
-
     private Flavor[] balls;
 
     public Cone() {
+        //this(Flavor.VANILLA); -> constructor Flavor... ipv Flavor[]
     }
 
     public Cone(Flavor[] balls) {
-        for (int index = 0; index < Flavor.values().length; index++) {
-            balls[index] = Flavor.CHOCOLATE;
-        }
         this.balls = balls;
     }
 
     @Override
     public void eat() {
-        System.out.println(Arrays.toString(balls));
+        for (Flavor flavor : balls) {
+            System.out.println(flavor);
+        }
     }
 
     public enum Flavor {
